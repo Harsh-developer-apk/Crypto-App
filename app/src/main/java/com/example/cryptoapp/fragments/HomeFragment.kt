@@ -22,6 +22,10 @@ import com.example.cryptoapp.api.ApiUtilities
 import com.example.cryptoapp.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -30,6 +34,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding:FragmentHomeBinding
     private lateinit var firebaseAuth:FirebaseAuth
+    private lateinit var database: FirebaseDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +42,10 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater)
+        firebaseAuth  = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        binding.profileEmail.text = firebaseAuth.currentUser?.email
+        fetchUserName()
         getTopCurrencyList()
         setTabLayout()
         binding.logoutButton.setOnClickListener {
@@ -51,6 +60,28 @@ class HomeFragment : Fragment() {
             requireActivity().finish()
         }
     }*/
+
+        // ... (rest of your code: logout(), setTabLayout(), getTopCurrencyList())
+
+        private fun fetchUserName() {
+            val userId = firebaseAuth.currentUser?.uid
+            if (userId != null) {
+                val userRef = database.reference.child("users").child(userId)
+                userRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val name = snapshot.child("name").getValue(String::class.java)
+                        if (name != null) {
+                            binding.profileName.text = "Welcome, $name!" // Assuming you have a TextView with id userNameTextView
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // Handle database error
+                        Log.e("HomeFragment", "Error fetching user name: ${error.message}")
+                    }
+                })
+            }
+        }
 
     private fun logout(){
         firebaseAuth = FirebaseAuth.getInstance()

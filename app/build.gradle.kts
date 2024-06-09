@@ -54,6 +54,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.14.2")
     implementation("com.google.firebase:firebase-auth:21.0.0")
     implementation("androidx.activity:activity:1.9.0")
+    implementation("com.google.firebase:firebase-database:21.0.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
     testImplementation("junit:junit:4.13.2")
     implementation ("com.github.ibrahimsn98:SmoothBottomBar:1.7.9")

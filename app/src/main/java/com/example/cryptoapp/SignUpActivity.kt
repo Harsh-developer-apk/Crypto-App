@@ -4,12 +4,14 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cryptoapp.databinding.ActivitySignUpBinding
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Delay
 
@@ -18,6 +20,7 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var progressDialog: ProgressDialog
+    private lateinit var database:FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +29,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
-
+        database = FirebaseDatabase.getInstance()
         binding.textView.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -47,6 +50,11 @@ class SignUpActivity : AppCompatActivity() {
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
                             progressDialog.dismiss()
+                            val userId = firebaseAuth.currentUser?.uid
+                            val userRef = database.getReference("users").child(userId!!)
+                            userRef.child("name").setValue(name).addOnCompleteListener{
+                                Log.d("FIREBASE","${userId}--${name}")
+                            }
                             firebaseAuth.currentUser?.sendEmailVerification()?.addOnCompleteListener{
                                 @Override
                                 fun onComplete(task: Task<Void>) {
