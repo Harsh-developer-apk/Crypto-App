@@ -23,4 +23,11 @@
     <string name="create_an_account">Create An Account</string>
     <string name="hey_there">Hey there,</string>
     <string name="enter_your_name">Enter your name</string>
+    <string name="forgot_password_title">Reset Your Password</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="already_have_an_account_login">Already have an Account? Login</string>
+    <string name="profile_name">Profile Name</string>
+    <string name="profile_email">Email</string>
+    <string name="logout">Logout</string>
 </resources>

@@ -142,6 +142,18 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/edittext_background"/>
+            <TextView
+                android:id="@+id/forgotPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#E1A500"
+                android:text="@string/forgot_password"
+                android:textStyle="bold"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:textAlignment="center"
+                app:layout_constraintTop_toBottomOf="@+id/button" />
 
             <!--<ImageView
                 android:id="@+id/imageView2"
@@ -161,7 +173,7 @@
                 android:layout_marginStart="32dp"
                 android:text="@string/sign_in"
                 android:background="@drawable/background_btn_2"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="80dp"
                 />
             <TextView
                 android:id="@+id/textView"

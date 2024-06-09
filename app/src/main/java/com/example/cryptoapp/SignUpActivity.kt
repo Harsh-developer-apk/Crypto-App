@@ -1,5 +1,6 @@
 package com.example.cryptoapp
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
@@ -9,11 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.cryptoapp.databinding.ActivitySignUpBinding
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Delay
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,9 +39,14 @@ class SignUpActivity : AppCompatActivity() {
 
             if (email.isNotEmpty() && pass.isNotEmpty() && confirmPass.isNotEmpty() && name.isNotEmpty() ) {
                 if (pass == confirmPass) {
-
+                        progressDialog = ProgressDialog(this)
+                        progressDialog.setTitle("Creating Account")
+                        progressDialog.setMessage("Please wait...")
+                        progressDialog.setCancelable(false) // Prevent dismissing by touching outside
+                        progressDialog.show()
                     firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
                         if (it.isSuccessful) {
+                            progressDialog.dismiss()
                             firebaseAuth.currentUser?.sendEmailVerification()?.addOnCompleteListener{
                                 @Override
                                 fun onComplete(task: Task<Void>) {
@@ -54,6 +63,7 @@ class SignUpActivity : AppCompatActivity() {
                             startActivity(intent)
                             finish()
                         } else {
+                            progressDialog.dismiss()
                             Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
 
                         }

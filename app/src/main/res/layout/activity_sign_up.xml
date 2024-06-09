@@ -267,7 +267,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#E1A500"
-                android:text="@string/Sign_UP"
+                android:text="@string/already_have_an_account_login"
                 android:textStyle="bold"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="32dp"
