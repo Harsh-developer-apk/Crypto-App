@@ -5,10 +5,22 @@
     <string name="not_found">Not found any data</string>
     <string name="search_hint">Search Crypto Currency</string>
     <string name="empty_watchList">WatchList is Empty</string>
+    <string name="Sign_IN">"Already Registered , Sign In !"</string>
+    <string name="signup">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="Sign_UP">Not Registered Yet, Sign Up !</string>
+    <string name="email">Enter your email</string>
+    <string name="password">Enter your password</string>
+    <string name="retype">Confirm your password</string>
     <string name="_15m">15 min</string>
     <string name="_1hr">1 hour</string>
     <string name="_4hr">4 hours</string>
     <string name="_1d">1 day </string>
     <string name="_1w">1 Week</string>
     <string name="_1m">1 Month</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="background_image">background Image</string>
+    <string name="create_an_account">Create An Account</string>
+    <string name="hey_there">Hey there,</string>
+    <string name="enter_your_name">Enter your name</string>
 </resources>

@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -51,6 +52,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("com.github.bumptech.glide:glide:4.14.2")
+    implementation("com.google.firebase:firebase-auth:21.0.0")
+    implementation("androidx.activity:activity:1.9.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.14.2")
     testImplementation("junit:junit:4.13.2")
     implementation ("com.github.ibrahimsn98:SmoothBottomBar:1.7.9")
